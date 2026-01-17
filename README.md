@@ -1,20 +1,39 @@
-# Plexify
+# Plexify.sh
 
-A robust Bash utility for automating the "Download-to-Plex" pipeline. `plexify` handles intelligent renaming, junk file purging, cross-filesystem moving, and triggers the modern Plex Media Server API for instant library updates.
+A robust Bash script designed to transform messy scene-release movie folders into Plex-perfect structures. It aggressively handles inconsistent naming, trailing release tags (like YTS.MX or RARBG), and automates subtitle organization.
 
+## Features
+- Nuclear Year-Cut: Isolates the movie title and year, vaporizing codecs, resolution, and group tags.
+- YTS-MX Guard: Specifically handles dots inside brackets that often break standard renaming logic.
+- Plex Subtitle Logic:
+    - Recursively finds subtitles in subfolders and moves them to the root.
+    - Maps 3-letter ISO codes (gre, fre, eng) to 2-letter Plex codes (el, fr, en).
+    - Preserves descriptive labels (e.g., Brazilian.pt.srt) to avoid generic numbering.
+- Automatic Cleanup: Deletes non-media junk (NFO, TXT, JPG) and prunes empty directories.
+- Safe Execution: Includes a default Dry-Run mode to preview changes.
 
+## Installation
+1. Save the script as plexify.sh.
+2. Make it executable:
+   chmod +x plexify.sh
+3. (Optional) Move to your bin:
+   sudo mv plexify.sh /usr/local/bin/plexify
 
-## ✨ Features
+## Usage
+Run the script against a movie folder:
 
-- **Smart Renaming**: Automatically converts `Movie.Title.2024.1080p.Bluray.x264.mkv` to `Movie Title (2024).mkv`.
-- **Junk Purge**: Deletes `.txt`, `.nfo`, and `.jpg` clutter while protecting the main movie and `.srt/.sub` subtitle files.
-- **Safety First**: Verifies target directory exists or is a mount point before moving to prevent filling up your root partition.
-- **Modern API Integration**: Uses the Plex Web API (`X-Plex-Token`) instead of deprecated CLI commands for faster, more reliable metadata matching.
-- **Dry-Run Mode**: Every action can be simulated before execution to ensure your library stays organized.
+plexify [OPTIONS] <TARGET_DIRECTORY>
 
-## 🚀 Installation
+### Options
+- -x: Execute. Required to actually perform renames and deletions.
+- -c: Clean. Triggers internal file renaming and junk removal.
 
-1. **Download the script**:
-   Place `plexify.sh` in `/usr/local/bin/` and make it executable:
-   ```bash
-   sudo chmod +x /usr/local/bin/plexify.sh
+### Example
+Input: Lucky Baskhar (2024) [720p] [WEBRip] [YTS.MX]/
+Command: plexify -x -c "Lucky Baskhar (2024) [720p] [WEBRip] [YTS.MX]/"
+Result: Lucky Baskhar (2024)/Lucky Baskhar (2024).mp4
+
+---
+
+## License
+MIT - Feel free to use and modify for your home server.
