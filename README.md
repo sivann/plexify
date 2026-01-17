@@ -1,4 +1,3 @@
-"""
 # Plexify.sh
 
 A robust Bash script designed to transform messy media folders into organized, Plex-compatible structures. It standardizes naming conventions, manages subtitles, and automates directory cleanup.
@@ -28,9 +27,9 @@ Run the script against a target directory:
 - `-c`: **Clean.** Triggers internal file renaming and the removal of junk files.
 
 ### Example
-**Input:** `Media.Title.2024.1080p.BluRay.x264/`
-**Command:** `plexify -x -c "Media.Title.2024.1080p.BluRay.x264/"`
-**Result:** `Media Title (2024)/Media Title (2024).mkv`
+**Input:** `Media.Title.1024.1080p.xyz.x264/`
+**Command:** `plexify -x -c "Media.Title.1024.576p.xyz.x264/"`
+**Result:** `Media Title (1024)/Media Title (1024).mkv`
 
 ---
 
